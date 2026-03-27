@@ -1,0 +1,10 @@
+streamlit
+torch
+torchvision
+segmentation-models-pytorch
+numpy
+rasterio
+geopandas
+shapely
+opencv-python-headless
+scipy
