@@ -8,3 +8,4 @@ geopandas
 shapely
 opencv-python-headless
 scipy
+gdown
