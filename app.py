@@ -8,6 +8,16 @@ from shapely.geometry import shape
 from rasterio.features import shapes
 import segmentation_models_pytorch as smp
 from scipy.ndimage import binary_opening
+import os
+import gdown
+
+MODEL_PATH = "model.pth"
+url = "https://drive.google.com/uc?id=16rSb_cQde4oclDfQ87hctmtICL3PKsl9"
+
+if not os.path.exists(MODEL_PATH):
+    gdown.download(url, MODEL_PATH, quiet=False)
+
+print("Model size:", os.path.getsize(MODEL_PATH))
 
 @st.cache_resource
 def load_model():
@@ -17,7 +27,7 @@ def load_model():
         in_channels=3,
         classes=1
     )
-    state_dict = torch.load("model.pth", map_location="cpu")
+    state_dict = torch.load(MODEL_PATH, map_location="cpu", weights_only=False)
     model.load_state_dict(state_dict)
     model.eval()
     return model
